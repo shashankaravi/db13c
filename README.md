@@ -1,6 +1,6 @@
 # fwb13chaparala
-Shashankaravi's Pug Assignment 
+Shashankaravi's Assignment 11 
 
-Hosted at https://assignmentpug.herokuapp.com/
+Hosted at https://assignmentchaparala.herokuapp.com/ 
 
 My class tacobell with Items (string), Quantity (string), and cost (number)
