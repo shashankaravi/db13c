@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p The man with the world’s deepest voice can make sounds humans can’t hear
+  button(type="button", class="btn btn-warning", onclick="update()") Press Me
+  br
+  br
+  div(id = "target") 
+    b Display
+  
+  br
+  br
+  a(href='/persis') Persis link
+  
+  script.  
+   var client_count=0;
+
+     function update()
+      {
+       client_count = client_count+1;
+       document.getElementById("target").innerHTML=`Value now ${client_count}`;
+     }
