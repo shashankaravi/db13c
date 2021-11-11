@@ -1,7 +1,7 @@
-<<<<<<< HEAD
+
 # fwb13chaparala
 Shashankaravi's Assignment 11 
-=======
+
 # db13chaparala
 >>>>>>> eedf81a29473ea93ba611351dd0a4f769fe4c4bd
 
