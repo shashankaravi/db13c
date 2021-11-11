@@ -3,12 +3,30 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var Costume = require("./models/costume");
+// database connection
+const connectionString =  
+process.env.MONGO_CON 
+mongoose = require('mongoose'); 
+mongoose.connect(connectionString,  
+{useNewUrlParser: true, 
+useUnifiedTopology: true});
+ 
+//Bind connection to error event
+var db = mongoose.connection;   
+db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
+db.once("open", function(){ 
+ console.log("Connection to DB succeeded")});
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var persisRouter = require('./routes/persis');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
+var resource = require('./routes/resource');
+var costume = require('./routes/costumes')
+ 
 
 var app = express();
 
@@ -27,6 +45,9 @@ app.use('/users', usersRouter);
 app.use('/persis', persisRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
+app.use('/resource',resource);
+app.use('/costume',costume)
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -43,5 +64,39 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// We can seed the collection if needed on 
+async function recreateDB(){ 
+  // Delete everything 
+ await Costume.deleteMany();  
+  let instance1 = new 
+Costume({costume_type:"coat",  size:'large', 
+cost:25.4}); 
+  instance1.save( function(err,doc) { 
+      if(err) return console.error(err); 
+      console.log("First object saved") 
+  }); 
+
+let instance2 = new 
+Costume({costume_type:"pant",  size:'medium', 
+cost:25.4}); 
+  instance2.save( function(err,doc) { 
+      if(err) return console.error(err); 
+      console.log("second object saved") 
+  });
+  
+let instance3 = new 
+Costume({costume_type:"jeans",  size:'medium', 
+cost:25.4}); 
+  instance3.save( function(err,doc) { 
+      if(err) return console.error(err); 
+      console.log("second object saved") 
+  }); 
+} 
+ 
+
+let reseed = true; 
+if (reseed) { recreateDB();} 
+
 
 module.exports = app;
