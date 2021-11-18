@@ -8,7 +8,7 @@ var Costume = require("./models/costume");
 const connectionString =  
 process.env.MONGO_CON 
 mongoose = require('mongoose'); 
-mongoose.connect(connectionString,  
+mongoose.connect('mongodb+srv://learningmongo:shashank1214@cluster0.p5q2s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',  
 {useNewUrlParser: true, 
 useUnifiedTopology: true});
  
